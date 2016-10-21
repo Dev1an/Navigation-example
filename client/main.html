@@ -1,0 +1,33 @@
+<head>
+  <title>navigation-test</title>
+</head>
+
+<body>
+    <h1>Welcome to Meteor!</h1>
+
+    {{> menuList mainMenu}}
+
+    {{path}}
+</body>
+
+<template name="menuList">
+    <ul>
+        {{#eachMenu items}}
+            {{> routeItem}}
+            {{> menuList menu}}
+        {{else}}
+            {{> routeItem}}
+        {{/eachMenu}}
+    </ul>
+</template>
+
+<template name="routeItem">
+    <li>
+        {{#if hasRoute}}
+            <a href="">{{title}}</a>
+        {{else}}
+            {{title}}
+        {{/if}}
+        {{#if isActive}}X{{/if}}
+    </li>
+</template>
