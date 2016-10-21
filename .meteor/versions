@@ -18,7 +18,7 @@ ddp-client@1.2.9
 ddp-common@1.2.6
 ddp-server@1.2.10
 deps@1.0.12
-devian:navigation@0.0.3
+devian:navigation@0.0.4
 diff-sequence@1.0.6
 ecmascript@0.5.8_1
 ecmascript-runtime@0.3.14_1

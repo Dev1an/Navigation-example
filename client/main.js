@@ -21,12 +21,22 @@ laptopAccessories.route('/macbook-pro', {name: ()=>`MacBook Pro (${new Date().ge
 laptopAccessories.route('/macbook-air', {name: 'MacBook Air'});
 laptopAccessories.route('/overview', {menuRoute: true});
 
-const members = mainMenu.group({prefix: '/members', name: 'Memebers'});
-members.route('/overview', {menuRoute: true});
-members.route('/:memberId', {name() {return 'member with id: ' + FlowRouter.getParam('memberId')}});
+const simpleMenuItems = mainMenu.items();
+
+const membersOverviewRoute = FlowRouter.route('/members');
+mainMenu.addItem(membersOverviewRoute, 'Members');
+
+const breadCrumbMenu = new Menu();
+for (let x of simpleMenuItems) breadCrumbMenu.addItem(x);
+const memberRoute = FlowRouter.route('/member/:memberId');
+const membersMenu = new Menu({route: membersOverviewRoute});
+breadCrumbMenu.addItem(membersMenu, "Members");
+membersMenu.addItem(memberRoute, function() {
+    return "Member with id: " + FlowRouter.getParam('memberId')
+});
 
 Template.body.helpers({
-    mainMenu,
+    mainMenu, breadCrumbMenu,
     path() {
         FlowRouter.watchPathChange();
         return FlowRouter.current().path;
